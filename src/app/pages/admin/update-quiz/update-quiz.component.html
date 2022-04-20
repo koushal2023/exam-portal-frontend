@@ -1,1 +1,62 @@
-<p>update-quiz works!</p>
+<div class="bootstrap-wrapper">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <mat-card>
+                    <h1>Update New Quiz</h1>
+                    <!-- {{quiz|json}} -->
+                    <form *ngIf="quiz" (ngSubmit)="updateQuiz()">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Title</mat-label>
+                            <input name="title" [(ngModel)]="quiz.title" matInput placeholder="Enter Here" required
+                                autofocus>
+                        </mat-form-field>
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Description</mat-label>
+                            <textarea [rows]="10" name="description" [(ngModel)]="quiz.description" matInput
+                                placeholder="Enter Category description Here" required></textarea>
+                        </mat-form-field>
+
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>MaxMarks</mat-label>
+                            <input name="maxMarks" [(ngModel)]="quiz.maxMarks" matInput placeholder="Enter Here"
+                                required>
+                        </mat-form-field>
+
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>NumberOfQuestions</mat-label>
+                            <input name="numberOfQuestions" [(ngModel)]="quiz.numberOfQuestions" matInput
+                                placeholder="Enter Here" required>
+                        </mat-form-field>
+
+                        <mat-slide-toggle [(ngModel)]="quiz.active" name="quiz.active" class="mb10 full-width"
+                            color="primary" [checked]=" false">
+                            Publish status
+                        </mat-slide-toggle>
+
+                        <!-- <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Select Category</mat-label>
+                            <select name="cid" [(ngModel)]="quiz.cid" *ngFor="categories as category">
+                                <option value="category.cid">{{category.title}}</option>
+                            </select>
+                        </mat-form-field> -->
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Select Category</mat-label>
+                            <mat-select name="category" [(ngModel)]="quiz.category.cid">
+                                <mat-option *ngFor="let c of categories" [value]="c.cid">
+                                    {{c.title}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <div class="container">
+                            <button type="submit" style="margin-right: 20px;" mat-raised-button
+                                color="primary">Update</button>
+
+                            <!-- <button type="reset" mat-raised-button color="accent">Clear</button> -->
+                        </div>
+                    </form>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
