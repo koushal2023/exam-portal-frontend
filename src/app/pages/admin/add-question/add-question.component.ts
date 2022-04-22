@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./add-question.component.css']
 })
 export class AddQuestionComponent implements OnInit {
+
   qid: any;
   qTitle: any;
   question: any = {
