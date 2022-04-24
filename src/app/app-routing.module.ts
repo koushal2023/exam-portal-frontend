@@ -14,7 +14,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { InstructionsComponent } from './pages/user/instructions/instructions.component';
 import { LoadQuizComponent } from './pages/user/load-quiz/load-quiz.component';
+import { StartQuizComponent } from './pages/user/start-quiz/start-quiz.component';
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
 import { UserWelcomeComponent } from './pages/user/user-welcome/user-welcome.component';
 import { AdminGuard } from './services/admin.guard';
@@ -96,7 +98,17 @@ const routes: Routes = [
         path: ':catId',
         component: LoadQuizComponent,
       },
+      {
+        path: 'instructions/:qid',
+        component: InstructionsComponent,
+      }
+
     ]
+  },
+  {
+    path: 'start-quiz/:qid',
+    component: StartQuizComponent,
+    canActivate: [UserGuard],
   }
 ];
 

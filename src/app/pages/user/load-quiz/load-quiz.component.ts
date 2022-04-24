@@ -13,6 +13,8 @@ export class LoadQuizComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private quizService: QuizService) { }
   ngOnInit(): void {
     // console.log(this.catId);
+    // we subscribe params from activatedroute because our page is loading only one time after user logged in successfully and we want 
+    // that whenever user click on the category url canges and with that url cid this component catId will get updated and our component will get updated automatically without reloading the page 
     this.activatedRoute.params.subscribe((params) => {
       this.catId = this.activatedRoute.snapshot.paramMap.get("catId");
       if (this.catId == 0) {
@@ -21,7 +23,7 @@ export class LoadQuizComponent implements OnInit {
           (data: any) => {
             this.quizzes = data;
             console.log(this.quizzes);
-            ;
+
           }, (error) => {
             console.log(error);
             alert("error in loading all quizzes");
@@ -31,8 +33,8 @@ export class LoadQuizComponent implements OnInit {
         console.log("load specific quiz");
         this.quizzes = this.quizService.getActiveQuizzesByCatId(this.catId).subscribe(
           (data: any) => {
-            console.log(data);
             this.quizzes = data;
+            console.log(this.quizzes);
 
           }, (error) => {
             console.log(error);
