@@ -16,10 +16,8 @@ export class ViewQuizzesComponent implements OnInit {
     this.quizService.getAllQuizzes().subscribe(
       (data) => {
         this.quizzes = data;
-        console.log(this.quizzes);
 
       }, (error) => {
-        console.log(error);
         Swal.fire("Error!!", "error in loading data", 'error');
       }
     );
@@ -37,12 +35,10 @@ export class ViewQuizzesComponent implements OnInit {
         // delete...
         this.quizService.deleteQuiz(qid).subscribe(
           (data) => {
-            console.log(data);
             this.quizzes = this.quizzes.filter((quiz: any) => quiz.qid != qid);
             Swal.fire("Success !!", "Quiz deleted successfully", 'success');
 
           }, (error) => {
-            console.log(error);
             Swal.fire("Error!!", "Quiz not deleted !!", 'error');
           }
         );

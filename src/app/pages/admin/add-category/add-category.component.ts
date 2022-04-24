@@ -32,12 +32,10 @@ export class AddCategoryComponent implements OnInit {
     }
     this.categoryService.createCategory(this.category).subscribe(
       (data) => {
-        console.log(data);
         Swal.fire("Success !!", "Category added successfully", "success");
         this.router.navigate(["/admin/categories"]);
       },
       (error) => {
-        console.log(error);
         Swal.fire("Error !!", "Category not added please try again", "error");
       }
     );

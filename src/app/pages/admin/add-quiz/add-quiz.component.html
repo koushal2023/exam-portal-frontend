@@ -4,7 +4,6 @@
             <div class="col-md-8 offset-md-2">
                 <mat-card>
                     <h1>Add New Quiz</h1>
-                    <!-- {{quiz|json}} -->
                     <form (ngSubmit)="addQuiz()">
                         <mat-form-field class="full-width" appearance="outline">
                             <mat-label>Title</mat-label>
@@ -34,12 +33,6 @@
                             Publish status
                         </mat-slide-toggle>
 
-                        <!-- <mat-form-field class="full-width" appearance="outline">
-                            <mat-label>Select Category</mat-label>
-                            <select name="cid" [(ngModel)]="quiz.cid" *ngFor="categories as category">
-                                <option value="category.cid">{{category.title}}</option>
-                            </select>
-                        </mat-form-field> -->
                         <mat-form-field class="full-width" appearance="outline">
                             <mat-label>Select Category</mat-label>
                             <mat-select name="category" [(ngModel)]="quiz.category.cid">

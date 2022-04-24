@@ -16,10 +16,8 @@ export class ViewCategoriesComponent implements OnInit {
     this.categoryService.getAllCategories().subscribe(
       (data) => {
         this.categories = data;
-        console.log(this.categories);
 
       }, (error) => {
-        console.log(error);
         Swal.fire("Error!!", "error in loading data", 'error');
       }
     );
@@ -37,12 +35,9 @@ export class ViewCategoriesComponent implements OnInit {
         // delete...
         this.categoryService.deleteCategory(cid).subscribe(
           (data) => {
-            console.log(data);
             this.categories = this.categories.filter((category: any) => category.cid != cid);
             Swal.fire("Success!!", "category deleted successfully", 'success');
-            // this.router.navigate(["/admin/categories"]);
           }, (error) => {
-            console.log(error);
             Swal.fire("Error!!", "error on deleting data!! try again", 'error');
           }
         );

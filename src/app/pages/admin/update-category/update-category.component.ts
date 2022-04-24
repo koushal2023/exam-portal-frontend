@@ -22,7 +22,6 @@ export class UpdateCategoryComponent implements OnInit {
 
   addCategory() {
     if (this.category.title.trim() == '' || this.category.title == null) {
-      // alert("username is required");
       this.snack.open("title is required", 'ok', { duration: 3000 });
       return;
     }
@@ -32,12 +31,10 @@ export class UpdateCategoryComponent implements OnInit {
     }
     this.categoryService.createCategory(this.category).subscribe(
       (data) => {
-        console.log(data);
         Swal.fire("Success !!", "Category added successfully", "success");
         this.router.navigate(["/admin/categories"]);
       },
       (error) => {
-        console.log(error);
         Swal.fire("Error !!", "Category not added please try again", "error");
       }
     );

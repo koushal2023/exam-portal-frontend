@@ -17,15 +17,12 @@ export class InstructionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.qid = this.activatedRoute.snapshot.paramMap.get("qid");
-    console.log(this.qid);
     this.quizService.getActiveQuizById(this.qid).subscribe(
       (data: any) => {
         this.quiz = data;
-        console.log(this.quiz);
 
       }, (error) => {
-        console.log(error);
-        alert("error in loading quiz data");
+        Swal.fire('Error ', 'error in loading quiz data', 'error');
       }
     );
   }
@@ -37,7 +34,6 @@ export class InstructionsComponent implements OnInit {
       confirmButtonText: 'Start',
       icon: 'info'
     }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         this.router.navigate(['/start-quiz/' + this.qid]);
       } else if (result.isDenied) {

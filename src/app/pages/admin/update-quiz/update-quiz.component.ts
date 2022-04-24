@@ -22,28 +22,23 @@ export class UpdateQuizComponent implements OnInit {
       (cat: any) => {
         this.categories = cat;
       }, (error) => {
-        console.log(error);
         this.snack.open("error while loading categories", 'ok');
       }
     );
 
     this.qId = this.activatedRoute.snapshot.paramMap.get('qid');
-    // alert(this.qId);
     this.quizService.getQuizById(this.qId).subscribe(
       (data: any) => {
         this.quiz = data;
-        console.log(this.quiz);
       }, (error) => {
-        console.log(error);
+        this.snack.open("error while loading Quiz", 'ok');
       }
     );
 
   }
 
   updateQuiz() {
-    console.log(this.quiz);
     if (this.quiz.title.trim() == '' || this.quiz.title == null) {
-      // alert("username is required");
       this.snack.open("title is required", 'ok', { duration: 3000 });
       return;
     }
@@ -68,12 +63,10 @@ export class UpdateQuizComponent implements OnInit {
     }
     this.quizService.updateQuiz(this.quiz).subscribe(
       (data) => {
-        console.log(data);
         Swal.fire("Success !!", "quiz added successfully", "success");
         this.router.navigate(["/admin/quizzes"]);
       },
       (error) => {
-        console.log(error);
         Swal.fire("Error !!", "quiz not added please try again", "error");
       }
     );

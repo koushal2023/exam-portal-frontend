@@ -12,9 +12,11 @@ import Swal from 'sweetalert2';
 export class StartQuizComponent implements OnInit {
   qid: any;
   questions: any;
+
   marksGot = 0;
   correctAnswers = 0;
   attempted = 0;
+
   isSubmit = false;
   timer: any;
 
@@ -31,19 +33,13 @@ export class StartQuizComponent implements OnInit {
       (data: any) => {
         this.questions = data;
         this.timer = this.questions.length * 2 * 60;
-        this.questions.forEach((q: any) => {
-          q['givenAnswer'] = '';
-        });
-        console.log(this.questions);
         this.startTimer();
 
       }, (error) => {
-        console.log(error);
         Swal.fire("Error", "errpr in loading questions of quiz", 'error');
       }
     );
   }
-  // to prevent back button , back button will not work after user start the quiz
   preventBackButton() {
     history.pushState(null, location.href);
     this.locationSt.onPopState(() => {
@@ -58,7 +54,6 @@ export class StartQuizComponent implements OnInit {
       confirmButtonText: `Submit`,
       icon: 'info'
     }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         this.evalQuiz();
       } else if (result.isDenied) {
@@ -86,22 +81,20 @@ export class StartQuizComponent implements OnInit {
 
   evalQuiz() {
     // calculation
-    this.isSubmit = true;
-    this.questions.forEach((q: any) => {
-      if (q.givenAnswer == q.answer) {
-        this.correctAnswers++;
-        let marksSingle = this.questions[0].quiz.maxMarks / this.questions.length;
-        this.marksGot += marksSingle;
+    // call to server to check questions
+    this.questionService.evalQuiz(this.questions).subscribe(
+      (data: any) => {
+        this.marksGot = parseFloat(Number(data.marksGot).toFixed(2));
+        this.correctAnswers = data.correctAnswers;
+        this.attempted = data.attempted;
+        this.isSubmit = true;
+      }, (error) => {
+        Swal.fire('Error ', 'Something Went Wrong!!', 'error');
       }
-      if (q.givenAnswer.trim() != '') {
-        this.attempted++;
-      }
-    });
-    console.log("correct Answers" + this.correctAnswers);
-    console.log("marks got" + this.marksGot);
-    console.log("attempted" + this.attempted);
+    );
+  }
 
-    console.log(this.questions);
-
+  printPage() {
+    window.print();
   }
 }

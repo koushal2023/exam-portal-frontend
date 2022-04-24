@@ -15,9 +15,7 @@ export class UserSidebarComponent implements OnInit {
     this.categoryService.getAllCategories().subscribe(
       (data: any) => {
         this.categories = data;
-        console.log(this.categories);
       }, (error) => {
-        console.log(error);
         this._snack.open('Error in loading form server', '', {
           duration: 3000
         });

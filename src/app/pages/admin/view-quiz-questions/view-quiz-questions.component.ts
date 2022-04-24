@@ -18,30 +18,15 @@ export class ViewQuizQuestionsComponent implements OnInit {
   ngOnInit(): void {
     this.qId = this.activatedRoute.snapshot.paramMap.get('qid');
     this.qTitle = this.activatedRoute.snapshot.paramMap.get('title');
-    console.log(this.qId);
-    console.log(this.qTitle);
 
     this.questionService.getQuestionsOfQuiz(this.qId).subscribe(
       (data) => {
         this.questions = data;
-        console.log(this.questions);
       }, (error) => {
-        console.log(error);
+        Swal.fire("Error !!", "Questions Not loaded successfully", "error");
       }
     );
   }
-
-  // deleteQuestion(quesId: any) {
-  //   this.questionService.deleteQuestionOfQuiz(quesId).subscribe(
-  //     (data) => {
-  //       console.log(data);
-  //     }, (error) => {
-  //       console.log(error);
-  //     }
-  //   );
-  // }
-
-
   deleteQuestion(quesId: any) {
     Swal.fire(
       {
@@ -54,12 +39,10 @@ export class ViewQuizQuestionsComponent implements OnInit {
         // delete...
         this.questionService.deleteQuestionOfQuiz(quesId).subscribe(
           (data) => {
-            console.log(data);
             this.questions = this.questions.filter((question: any) => question.quesId != quesId);
             Swal.fire("Success !!", "questions deleted successfully", 'success');
 
           }, (error) => {
-            console.log(error);
             Swal.fire("Error!!", "questions not deleted !!", 'error');
           }
         );

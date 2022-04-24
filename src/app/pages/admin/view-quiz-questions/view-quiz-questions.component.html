@@ -15,7 +15,6 @@
 
             <mat-card *ngFor="let q of questions; let i=index" class="mt20">
                 <mat-card-content>
-                    <!-- instead of <span> {{q.content}} </span> we can use <span [innerHTML]="q.content"></span> -->
                     <p> <b> Q{{i+1}}) </b> <span [innerHTML]="q.content"></span></p>
                     <div class="container-fluid">
                         <div class="row">

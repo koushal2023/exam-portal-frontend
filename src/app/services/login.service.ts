@@ -7,9 +7,7 @@ import baseUrl from './helper';
   providedIn: 'root'
 })
 export class LoginService {
-  // we use subject here because as we are going from login page to dashboard page our isLoggedIn is not updated because 
-  // our window will not get refereshed and OnInit method will not run to set isLoggedIn property globally we will use subject 
-  // because All the subscribers, who subscribe to the subject will receive the same instance of the subject & hence the same values
+
 
   public loginStatusSubject = new Subject<boolean>();
 
@@ -40,7 +38,6 @@ export class LoginService {
     }
   }
 
-  //logout : it basically remove token from localstorage
   public logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -52,13 +49,11 @@ export class LoginService {
     return localStorage.getItem("token");
   }
 
-  // to set user details in localstorage
-  // json.stringify convert json into string
+
   public setUser(user: any) {
     localStorage.setItem("user", JSON.stringify(user));
   }
 
-  // json.parse will convert the data into json
   public getUser() {
     let userStr = localStorage.getItem("user");
     if (userStr != null) {

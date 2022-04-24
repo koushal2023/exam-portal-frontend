@@ -10,7 +10,6 @@ import Swal from 'sweetalert2';
 export class SignupComponent implements OnInit {
 
   constructor(private userService: UserService, private snack: MatSnackBar) { }
-  // you can create another class and use that instead this 
   user = {
     username: '',
     password: '',
@@ -23,9 +22,7 @@ export class SignupComponent implements OnInit {
   }
 
   formSubmit() {
-    // console.log(this.user);
     if (this.user.username == '' || this.user.username == null) {
-      // alert("username is required");
       this.snack.open("username is required", 'ok', { duration: 3000 });
       return;
     }
@@ -50,21 +47,11 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-    // validate
 
     this.userService.addUser(this.user).subscribe(
       (response: any) => {
-        console.log(response);
-        // alert('success');
-        // this.snack.open("registration completed successfully", "", { duration: 3000 });
-        console.log("this is response");
-
         Swal.fire('Successfully Registered !!', response.username + ' is registered successfully', 'success');
       }, (error) => {
-        console.log(error);
-        // alert('something went wrong');
-        // this.snack.open("something went wrong", "", { duration: 3000 });
-        console.log("this is error");
 
         Swal.fire('Error ', 'user with this username is already there in DB !! try with another username', 'error');
 

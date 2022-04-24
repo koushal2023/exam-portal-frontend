@@ -31,7 +31,6 @@ export class AddQuizComponent implements OnInit {
       (cat: any) => {
         this.categories = cat;
       }, (error) => {
-        console.log(error);
         this.snack.open("error while loading categories", 'ok');
       }
     );
@@ -39,9 +38,7 @@ export class AddQuizComponent implements OnInit {
 
 
   addQuiz() {
-    console.log(this.quiz);
     if (this.quiz.title.trim() == '' || this.quiz.title == null) {
-      // alert("username is required");
       this.snack.open("title is required", 'ok', { duration: 3000 });
       return;
     }
@@ -66,12 +63,10 @@ export class AddQuizComponent implements OnInit {
     }
     this.quizService.createQuiz(this.quiz).subscribe(
       (data) => {
-        console.log(data);
         Swal.fire("Success !!", "quiz added successfully", "success");
         this.router.navigate(["/admin/quizzes"]);
       },
       (error) => {
-        console.log(error);
         Swal.fire("Error !!", "quiz not added please try again", "error");
       }
     );
