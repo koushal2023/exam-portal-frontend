@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
         this.loginService.loginUser(data.token);
         this.loginService.getCurrentUser().subscribe(
           (user: any) => {
+            delete user.password;
             this.loginService.setUser(user);
             // redirect .... ADMIN : admin-dashboard
             // redirect .... User : user-dashboard

@@ -50,7 +50,7 @@ export class SignupComponent implements OnInit {
 
     this.userService.addUser(this.user).subscribe(
       (response: any) => {
-        Swal.fire('Successfully Registered !!', response.username + ' is registered successfully', 'success');
+        Swal.fire('Successfully Registered !!', response.username + ' is registered successfully , Now Login!!', 'success');
       }, (error) => {
 
         Swal.fire('Error ', 'user with this username is already there in DB !! try with another username', 'error');
